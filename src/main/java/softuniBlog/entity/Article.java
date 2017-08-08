@@ -10,14 +10,14 @@ public class Article {
     private String content;
     private User author;
 
-    public Article(Integer id, String title, String content, User author) {
-        this.id = id;
+
+    public Article(String title, String content, User author) {
         this.title = title;
         this.content = content;
         this.author = author;
     }
 
-    public Article(String title, String content, User userEntity) {
+    public Article() {
     }
 
     @Id
@@ -40,7 +40,7 @@ public class Article {
         this.title = title;
     }
 
-    @Column(columnDefinition = "text",nullable = false)
+    @Column(columnDefinition = "text", nullable = false)
     public String getContent() {
         return content;
     }
@@ -57,5 +57,10 @@ public class Article {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    @Transient
+    public String getSummary() {
+        return this.getContent().substring(0, this.getContent().length() / 2) + "...";
     }
 }
